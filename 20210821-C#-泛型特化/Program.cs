@@ -145,6 +145,16 @@ namespace Demo5 {
 }
 
 static class Demo7 {
+    class CA<T> {
+        private T A;
+    }
+    static void Test<T>(CA<T> x, CA<T> y) where T : IComparable<T> {
+        int resutl = x.CompareTo(y);
+    }
+}
+
+
+static class Demo9 {
     class Point<T> { public T X; public T Y; }
     static void Test(Point<int> p1, Point<int> p2) {
         Point<int> p = p1 + p2;

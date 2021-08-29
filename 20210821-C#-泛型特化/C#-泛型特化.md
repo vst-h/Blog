@@ -157,7 +157,18 @@ static class CBExFn {
     ![无法推导出 T 是 int 类型](./CB_IA2Int_typeinfer.png)
 
     这并不是泛型特化的问题，这是 C# 没支持高阶泛型的问题。
-3. 不能对静态方法做抽象，以至于一些类型的特化没能做出来。
+3. 不能对特定的泛型实现特定的抽象。
+
+   ``` csharp
+    class CA<T> {
+        private T A;
+    }
+    static void Test<T>(CA<T> x, CA<T> y) where T : IComparable<T> {
+        int resutl = x.CompareTo(y);
+    }
+   ```
+   我们希望 `CA<T>` 的 `T` 类型只要满足了 `IComparable<T>`，我们就为 `CA<T>` 提供一个 `IComparable<CA<T>>` 抽象，使得 `CA<T>` 拥有 `CompareTo` 方法。
+4. 不能对静态方法做抽象，以至于一些类型的特化没能做出来。
    
    举个例子，我要实现一个  `Point<T>`，只要 `T` 类型实现了加法操作符，这个 `Point<T>` 就能进行加法运算。
 
@@ -170,7 +181,7 @@ static class CBExFn {
         Point<float> p = p1 + p2;
     }
     ```
-   应该如何对这个 `T` 进行特化？目前还做不到，等这个提案实现：[Static abstract members in interfaces](https://github.com/dotnet/csharplang/issues/4436)。
+   应该如何对这个 `T` 进行特化？目前还做不到，等这个提案实现：`[Static abstract members in interfaces](https://github.com/dotnet/csharplang/issues/4436)`。
    
    以 Rust 的实现作为示例
    （[Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=175473360a7d9e60c843999e7193c634)），
