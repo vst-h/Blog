@@ -11,7 +11,7 @@ new[] { "333", "22", "4444" }.Max();
 
 
 #if DEBUG
-List<int> Test1(List<List<int>> list) {
+Exception Test1(List<Exception> list) {
     return list.Max();
 }
 Test1(new() { new() { }, new() { } });
@@ -183,6 +183,7 @@ namespace Demo5 {
                 var max = new int?[] { null, null }.MaxBy(x => x);
                 Console.WriteLine($"{null} == {max}");
             }
+            Comparer
         }
     }
 }
