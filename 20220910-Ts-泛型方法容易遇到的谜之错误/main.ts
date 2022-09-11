@@ -32,7 +32,7 @@ namespace example2 {
     return a
   }
   function fn2<T extends number | string = number>(a: T = 100): T {
-    // 泛型参数加上默认值也是不允许的
+    // 泛型参数加上默认值还是会报错
     return a
   }
 }
